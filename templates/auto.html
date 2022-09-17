@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block barraDeNavegacion %}
+<a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+{% endblock %}
+
+{% block titulo %}
+Autos
+{% endblock %}
+
+{% block contenido %}
+    <h1>Agregar autos</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+    {% for auto in autos %}
+        {{ auto.titulo }} <br>
+        {{ auto.imagen }} <br>
+        
+    {% endfor %}
+{% endblock %}
