@@ -1,3 +1,6 @@
 from django.contrib import admin
+from AppBlog.models import *
 
-# Register your models here.
+admin.site.register(Auto)
+admin.site.register(Moto)
+admin.site.register(Camioneta)
