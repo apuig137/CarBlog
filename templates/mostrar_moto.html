@@ -4,9 +4,10 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
+<a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 <a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
 <a class="navbar-brand" href="{% url 'agregarImagenMoto' %}">Agregar Imagenes</a>
-<a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 {% endblock %}
 
 {% block titulo %}
@@ -14,9 +15,12 @@ Motos
 {% endblock %}
 
 {% block contenido %}
-    <h1>Motos cargadas</h1>
+    <h3>Los resultados son:</h3>
     {% for moto in motos %}
-        {{moto.titulo}}
-        <br>
+        {{ moto.titulo }}<br>
+        {{ moto.subtitulo }}<br>
+        {{ moto.cuerpo }}<br>
+        {{ moto.autor }}<br>
+        {{ moto.fecha }}<br>
     {% endfor %}
 {% endblock %}

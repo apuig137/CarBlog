@@ -4,9 +4,10 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'camioneta' %}">Camionetas</a>
+<a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
 <a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
 <a class="navbar-brand" href="{% url 'agregarImagenCamioneta' %}">Agregar Imagenes</a>
-<a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
 {% endblock %}
 
 {% block titulo %}
@@ -14,9 +15,12 @@ Camionetas
 {% endblock %}
 
 {% block contenido %}
-    <h1>Camionetas cargadas</h1>
+    <h3>Los resultados son:</h3>
     {% for camioneta in camionetas %}
-        {{camioneta.titulo}}
-        <br>
+        {{ camioneta.titulo }}<br>
+        {{ camioneta.subtitulo }}<br>
+        {{ camioneta.cuerpo }}<br>
+        {{ camioneta.autor }}<br>
+        {{ camioneta.fecha }}<br>
     {% endfor %}
 {% endblock %}

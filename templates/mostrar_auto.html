@@ -4,10 +4,10 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
+<a class="navbar-brand" href="{% url 'autoBusqueda' %}">Buscar Autos</a>
 <a class="navbar-brand" href="{% url 'agregarAuto' %}">Agregar Autos</a>
 <a class="navbar-brand" href="{% url 'agregarImagenAuto' %}">Agregar Imagenes</a>
-<a class="navbar-brand" href="{% url 'autoBusqueda' %}">Buscar Autos</a>
-
 {% endblock %}
 
 {% block titulo %}
@@ -15,9 +15,13 @@ Autos
 {% endblock %}
 
 {% block contenido %}
-    <h1>Autos cargados</h1>
+    <h3>Los resultados son:</h3>
     {% for auto in autos %}
-        {{auto.titulo}}
-        <br>
+        {{ auto.titulo }}<br>
+        {{ auto.subtitulo }}<br>
+        {{ auto.cuerpo }}<br>
+        {{ auto.autor }}<br>
+        {{ auto.fecha }}<br>
     {% endfor %}
 {% endblock %}
+    

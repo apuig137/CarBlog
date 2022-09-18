@@ -4,9 +4,8 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-<a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
+<a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
 <a class="navbar-brand" href="{% url 'agregarImagenMoto' %}">Agregar Imagenes</a>
-<a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 {% endblock %}
 
 {% block titulo %}
@@ -14,9 +13,12 @@ Motos
 {% endblock %}
 
 {% block contenido %}
-    <h1>Motos cargadas</h1>
-    {% for moto in motos %}
-        {{moto.titulo}}
-        <br>
-    {% endfor %}
+<h1>Agregar moto</h1>
+    <form action="{% url 'agregarMoto' %}" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit", value="Enviar">
+    </form>
 {% endblock %}

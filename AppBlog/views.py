@@ -7,8 +7,15 @@ from AppBlog.forms import *
 def inicio(request):
     return render(request,"index.html")
 
+def about(request):
+    return render(request,"portafolio.html")
 
 def auto(request):
+    autos=Auto.objects.all()
+    contexto={"autos":autos}
+    return render(request,"auto.html",contexto)
+
+def agregar_auto(request):
     if request.method == "POST":
         mi_formulario = AutoFormulario(request.POST)
         print(mi_formulario)
@@ -25,16 +32,22 @@ def auto(request):
         "form" : AutoFormulario(),
         "autos" : autos,
     }
-    return render(request,"auto.html",contexto)
+    return render(request,"agregar_auto.html",contexto)
 
 
-def auto_filtrado(request):
-    titulo = request.GET.get("titulo")
-    autos = Auto.objects.filter(titulo__icontains=titulo)
-    contexto = {
-        "autos" : autos,
+def auto_busqueda(request):
+    contexto={
+        "form":VehiculoBusqueda(),
     }
-    return render(request,"auto_filtrado.html",contexto)
+    return render(request,"auto_busqueda.html",contexto)
+      
+def mostrar_auto(request):
+    titulo=request.GET.get('titulo')
+    autos=Auto.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "autos":autos
+    }
+    return render(request,"mostrar_auto.html",contexto)
 
 
 def agregar_imagen_auto(request):
@@ -56,8 +69,12 @@ def agregar_imagen_auto(request):
     }
     return render(request,"agregar_imagen_auto.html",contexto)
 
-
 def moto(request):
+    motos=Moto.objects.all()
+    contexto={"motos":motos}
+    return render(request,"moto.html",contexto)
+
+def agregar_moto(request):
     if request.method == "POST":
         mi_formulario = MotoFormulario(request.POST)
         print(mi_formulario)
@@ -68,23 +85,27 @@ def moto(request):
             autor = mi_formulario.cleaned_data.get("autor")
             obj = Moto.objects.create(titulo = titulo,subtitulo = subtitulo,cuerpo =cuerpo,autor=autor)
             obj.save()
-            return redirect("camioneta")
+            return redirect("moto")
     motos=Moto.objects.all()
     contexto = {
         "form" : MotoFormulario(),
         "motos" : motos,
     }
-    return render(request,"moto.html",contexto)
+    return render(request,"agregar_moto.html",contexto)
 
-
-def moto_filtrado(request):
-    titulo = request.GET.get("titulo")
-    motos = Moto.objects.filter(titulo__icontains=titulo)
-    contexto = {
-        "motos" : motos,
+def moto_busqueda(request):
+    contexto={
+        "form":VehiculoBusqueda(),
     }
-    return render(request,"moto_filtrado.html",contexto)
-
+    return render(request,"moto_busqueda.html",contexto)
+      
+def mostrar_moto(request):
+    titulo=request.GET.get('titulo')
+    motos=Moto.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "motos":motos
+    }
+    return render(request,"mostrar_moto.html",contexto)
 
 def agregar_imagen_moto(request):
     if request.method=="POST":
@@ -97,7 +118,7 @@ def agregar_imagen_moto(request):
                 foto.imagen=mi_formulario.cleaned_data["imagen"]
                 foto.save()
             else:
-                foto=MotoImagen(auto=data.get("auto"), imagen=data.get("imagen"))
+                foto=MotoImagen(moto=data.get("moto"), imagen=data.get("imagen"))
                 foto.save()
         return redirect("inicio")
     contexto={
@@ -105,8 +126,12 @@ def agregar_imagen_moto(request):
     }
     return render(request,"agregar_imagen_moto.html",contexto)
 
-
 def camioneta(request):
+    camionetas=Camioneta.objects.all()
+    contexto={"camionetas":camionetas}
+    return render(request,"camioneta.html",contexto)
+
+def agregar_camioneta(request):
     if request.method == "POST":
         mi_formulario = CamionetaFormulario(request.POST)
         print(mi_formulario)
@@ -123,8 +148,21 @@ def camioneta(request):
         "form" : CamionetaFormulario(),
         "camionetas" : camionetas,
     }
-    return render(request,"camioneta.html",contexto)
+    return render(request,"agregar_camioneta.html",contexto)
 
+def camioneta_busqueda(request):
+    contexto={
+        "form":VehiculoBusqueda(),
+    }
+    return render(request,"camioneta_busqueda.html",contexto)
+      
+def mostrar_camioneta(request):
+    titulo=request.GET.get('titulo')
+    camionetas=Camioneta.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "camionetas":camionetas
+    }
+    return render(request,"mostrar_camioneta.html",contexto)
 
 def camioneta_filtrado(request):
     titulo = request.GET.get("titulo")
@@ -156,8 +194,3 @@ def agregar_imagen_camioneta(request):
 
 
 
-def busqueda(request):
-    contexto = {
-        "form" : VehiculoBusqueda(),
-    } 
-    return render(request,"busqueda.html",contexto)

@@ -6,6 +6,7 @@
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
 <a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
 <a class="navbar-brand" href="{% url 'agregarAuto' %}">Agregar Autos</a>
+<a class="navbar-brand" href="{% url 'agregarImagenAuto' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -13,11 +14,11 @@ Autos
 {% endblock %}
 
 {% block contenido %}
-    <h3>Cargar imagen del auto</h3>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <h3>Ingrese el auto que mas le guste:</h3>
+    <form action="{% url 'mostrarAuto' %}" method="GET">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Subir">
+            {{ form.as_p }}
+            <input type="submit" value="Buscar">
     </form>
 {% endblock %}
     

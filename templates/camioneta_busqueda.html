@@ -4,9 +4,9 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'camioneta' %}">Autos</a>
 <a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
 <a class="navbar-brand" href="{% url 'agregarImagenCamioneta' %}">Agregar Imagenes</a>
-<a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
 {% endblock %}
 
 {% block titulo %}
@@ -14,9 +14,10 @@ Camionetas
 {% endblock %}
 
 {% block contenido %}
-    <h1>Camionetas cargadas</h1>
-    {% for camioneta in camionetas %}
-        {{camioneta.titulo}}
-        <br>
-    {% endfor %}
+    <h3>Ingrese el auto que mas le guste:</h3>
+    <form action="{% url 'mostrarCamioneta' %}" method="GET">
+        {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Buscar">
+    </form>
 {% endblock %}

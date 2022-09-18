@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio</title>
+  <link rel="stylesheet" href='{% static "AppBlog/css/styles2.css" %}'/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"/>
+</head>
+<body>
+  <div class="wrapper"> 
+    <header>
+      <nav class="navbar">
+        <div class="brand">
+          <h2>A<span>P</span></h2>
+        </div>
+        <ul class="menu">
+          <li><a href="#"  class="activo">Inicio</a></li>
+          <li><a href="#">Quien Soy</a></li>
+          <li><a href="#">Portafolio</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <div class="info-content">
+        <h1><span>Agustin</span> Puig</h1>
+        <h3>Full Stack Developer</h3>
+        <a download="" href="#"><button class="download-cv">Descargar CV</button></a>
+      </div>
+      <img src='{% static "AppBlog/img/agustin-fachero-removebg-preview.png" %}' alt="Foto de Agustin Puig">
+    </main>
+  </div>
+
+  <div class="acerca">
+    <img src='{% static "AppBlog/img/HD-wallpaper-code-codes-data-click-programming-text.jpg" %}' alt="">
+    <div class="acerca-info">
+      <h2>Acerca de mi</h2>
+      <div class="divider"></div>
+      <p>Desarrollo paginas web utilizando Javascript, HTML y CSS para el desarrollo del Frontend, acompañando dichas tecnologias con las herramientas de Bootstrap y React.</p>
+      <p>En cuanto al desarrollo del Backend me apoyo en Python como lenguaje y lo complemento con las herramientas que ofrece Django.</p>
+    </div>
+  </div>
+
+  <div class="portafolio">
+    <div class="portafolio-headings">
+      <h2>Mi Portafolio</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="card-img"></div>
+        <div class="card-title">
+          <h2>Descripcion del Proyecto</h2>
+        </div>
+        <div class="card-projects-links">
+          <a href=""><i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-light fa-earth-americas"></i></a>
+          <a href=""><i class="fa-sharp fa-solid fa-code"></i></a>
+        </div>
+        <div class="project-details-content">
+          <button class="project-details download-cv">
+          <a href="">
+            Detalles del proyecto
+          </a>
+        </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"></div>
+        <div class="card-title">
+          <h2>Descripcion del Proyecto</h2>
+        </div>
+        <div class="card-projects-links">
+          <a href=""><i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-light fa-earth-americas"></i></a>
+          <a href=""><i class="fa-sharp fa-solid fa-code"></i></a>
+        </div>
+        <div class="project-details-content">
+          <button class="project-details download-cv">
+          <a href="">
+            Detalles del proyecto
+          </a>
+        </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"></div>
+        <div class="card-title">
+          <h2>Descripcion del Proyecto</h2>
+        </div>
+        <div class="card-projects-links">
+          <a href=""><i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-light fa-earth-americas"></i></a>
+          <a href=""><i class="fa-sharp fa-solid fa-code"></i></a>
+        </div>
+        <div class="project-details-content">
+          <button class="project-details download-cv">
+          <a href="">
+            Detalles del proyecto
+          </a>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-headings">
+      <h2>Contactar</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="container-contact">
+      <div class="contact-form">
+        <h4>Mandame un mensaje!</h4>
+        <form class="form-group">
+          <input type="text" placeholder="Nombre" class="input">
+          <input type="email" placeholder="Email" class="input">
+          <textarea name="message" placeholder="Deja tu mensaje aqui..."></textarea>
+          <button type="submit" class="btn-submit">Enviame un mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <h2>Agustin Puig</h2>
+      <h5>Full Stack Developer</h5>
+    </div>
+    <div class="social-networks">
+      <i class="fa-brands fa-linkedin"></i>
+      <i class="fa-brands fa-instagram"></i>
+    </div>
+  </footer>
+</body>
+</html>

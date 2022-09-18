@@ -5,7 +5,7 @@
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
 <a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
-<a class="navbar-brand" href="{% url 'agregarAuto' %}">Agregar Autos</a>
+<a class="navbar-brand" href="{% url 'agregarImagenAuto' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -13,11 +13,12 @@ Autos
 {% endblock %}
 
 {% block contenido %}
-    <h3>Cargar imagen del auto</h3>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <h1>Agregar auto</h1>
+    <form action="{% url 'agregarAuto' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Subir">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit", value="Enviar">
     </form>
 {% endblock %}
-    
