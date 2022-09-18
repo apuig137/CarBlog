@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block barraDeNavegacion %}
+<a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'agregarImagenCamioneta' %}">Agregar Imagenes</a>
+{% endblock %}
+
+{% block titulo %}
+Camionetas
+{% endblock %}
+
+{% block contenido %}
+    <h1>Agregar camionetas</h1>
+    <form action="{% url 'camioneta' %}" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit", value="Enviar">
+    </form>
+    {% for camioneta in camionetas %}
+        {{camioneta.titulo}}
+        <br>
+    {% endfor %}
+{% endblock %}

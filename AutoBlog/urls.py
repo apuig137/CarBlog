@@ -24,5 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("AppBlog/",include("AppBlog.urls")),
     path("AppUsuario/",include("AppUsuario.urls")),
-    path("",inicio,name="inicio")
+    path("",inicio,name="inicio"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

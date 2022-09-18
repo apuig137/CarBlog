@@ -1,29 +1,24 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from AppBlog.models import *
 from AppBlog.forms import *
-import datetime
+
 
 def inicio(request):
     return render(request,"index.html")
 
-def moto(request):
-    return render(request,"moto.html")
 
-def camioneta(request):
-    return render(request,"camioneta.html")
-
-def autos(request):
+def auto(request):
     if request.method == "POST":
         mi_formulario = AutoFormulario(request.POST)
         print(mi_formulario)
         if mi_formulario.is_valid():
-            data = mi_formulario.cleaned_data
-            auto1=Auto(titulo=data.get("titulo"),subtitulo=data.get("subtitulo"),cuerpo=data.get("cuerpo"),autor=data.get("autor"),fecha=data.get("fecha"),imagen=data.get("imagen"))
-            auto1.save()
+            titulo = mi_formulario.cleaned_data.get("titulo")
+            subtitulo = mi_formulario.cleaned_data.get("subtitulo")
+            cuerpo = mi_formulario.cleaned_data.get("cuerpo")
+            autor = mi_formulario.cleaned_data.get("autor")
+            obj = Auto.objects.create(titulo = titulo,subtitulo = subtitulo,cuerpo =cuerpo,autor=autor)
+            obj.save()
             return redirect("auto")
     autos=Auto.objects.all()
     contexto = {
@@ -32,11 +27,6 @@ def autos(request):
     }
     return render(request,"auto.html",contexto)
 
-def auto_busqueda(request):
-    contexto = {
-        "form" : VehiculoBusqueda(),
-    } 
-    return render(request,"auto_busqueda.html",contexto)
 
 def auto_filtrado(request):
     titulo = request.GET.get("titulo")
@@ -46,14 +36,128 @@ def auto_filtrado(request):
     }
     return render(request,"auto_filtrado.html",contexto)
 
-def moto_formulario(request):
-    contexto = {
-        "form" : MotoFormulario()
-    }
-    return render(request,"moto_formulario.html",contexto)
 
-def camioneta_formulario(request):
-    contexto = {
-        "form" : CamionetaFormulario()
+def agregar_imagen_auto(request):
+    if request.method=="POST":
+        mi_formulario=AutoImagenFormulario(request.POST,request.FILES)
+        if mi_formulario.is_valid():
+            data=mi_formulario.cleaned_data
+            foto=AutoImagen.objects.filter(auto=data.get("titulo"))
+            if len(foto)>0:
+                foto=foto[0]
+                foto.imagen=mi_formulario.cleaned_data["imagen"]
+                foto.save()
+            else:
+                foto=AutoImagen(auto=data.get("auto"), imagen=data.get("imagen"))
+                foto.save()
+        return redirect("inicio")
+    contexto={
+        "form":AutoImagenFormulario(),
     }
-    return render(request,"camioneta_formulario.html",contexto)
+    return render(request,"agregar_imagen_auto.html",contexto)
+
+
+def moto(request):
+    if request.method == "POST":
+        mi_formulario = MotoFormulario(request.POST)
+        print(mi_formulario)
+        if mi_formulario.is_valid():
+            titulo = mi_formulario.cleaned_data.get("titulo")
+            subtitulo = mi_formulario.cleaned_data.get("subtitulo")
+            cuerpo = mi_formulario.cleaned_data.get("cuerpo")
+            autor = mi_formulario.cleaned_data.get("autor")
+            obj = Moto.objects.create(titulo = titulo,subtitulo = subtitulo,cuerpo =cuerpo,autor=autor)
+            obj.save()
+            return redirect("camioneta")
+    motos=Moto.objects.all()
+    contexto = {
+        "form" : MotoFormulario(),
+        "motos" : motos,
+    }
+    return render(request,"moto.html",contexto)
+
+
+def moto_filtrado(request):
+    titulo = request.GET.get("titulo")
+    motos = Moto.objects.filter(titulo__icontains=titulo)
+    contexto = {
+        "motos" : motos,
+    }
+    return render(request,"moto_filtrado.html",contexto)
+
+
+def agregar_imagen_moto(request):
+    if request.method=="POST":
+        mi_formulario=MotoImagenFormulario(request.POST,request.FILES)
+        if mi_formulario.is_valid():
+            data=mi_formulario.cleaned_data
+            foto=MotoImagen.objects.filter(auto=data.get("titulo"))
+            if len(foto)>0:
+                foto=foto[0]
+                foto.imagen=mi_formulario.cleaned_data["imagen"]
+                foto.save()
+            else:
+                foto=MotoImagen(auto=data.get("auto"), imagen=data.get("imagen"))
+                foto.save()
+        return redirect("inicio")
+    contexto={
+        "form":MotoImagenFormulario(),
+    }
+    return render(request,"agregar_imagen_moto.html",contexto)
+
+
+def camioneta(request):
+    if request.method == "POST":
+        mi_formulario = CamionetaFormulario(request.POST)
+        print(mi_formulario)
+        if mi_formulario.is_valid():
+            titulo = mi_formulario.cleaned_data.get("titulo")
+            subtitulo = mi_formulario.cleaned_data.get("subtitulo")
+            cuerpo = mi_formulario.cleaned_data.get("cuerpo")
+            autor = mi_formulario.cleaned_data.get("autor")
+            obj = Camioneta.objects.create(titulo = titulo,subtitulo = subtitulo,cuerpo =cuerpo,autor=autor)
+            obj.save()
+            return redirect("camioneta")
+    camionetas=Camioneta.objects.all()
+    contexto = {
+        "form" : CamionetaFormulario(),
+        "camionetas" : camionetas,
+    }
+    return render(request,"camioneta.html",contexto)
+
+
+def camioneta_filtrado(request):
+    titulo = request.GET.get("titulo")
+    camionetas = Camioneta.objects.filter(titulo__icontains=titulo)
+    contexto = {
+        "camionetas" : camionetas,
+    }
+    return render(request,"camioneta_filtrado.html",contexto)
+
+
+def agregar_imagen_camioneta(request):
+    if request.method=="POST":
+        mi_formulario=CamionetaImagenFormulario(request.POST,request.FILES)
+        if mi_formulario.is_valid():
+            data=mi_formulario.cleaned_data
+            foto=CamionetaImagen.objects.filter(auto=data.get("titulo"))
+            if len(foto)>0:
+                foto=foto[0]
+                foto.imagen=mi_formulario.cleaned_data["imagen"]
+                foto.save()
+            else:
+                foto=CamionetaImagen(auto=data.get("auto"), imagen=data.get("imagen"))
+                foto.save()
+        return redirect("inicio")
+    contexto={
+        "form":CamionetaImagenFormulario(),
+    }
+    return render(request,"agregar_imagen_camioneta.html",contexto)
+
+
+
+def busqueda(request):
+    contexto = {
+        "form" : VehiculoBusqueda(),
+    } 
+    return render(request,"busqueda.html",contexto)

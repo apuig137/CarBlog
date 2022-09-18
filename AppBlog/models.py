@@ -9,21 +9,30 @@ class Auto(models.Model):
     subtitulo=models.CharField(max_length=50)
     cuerpo=models.CharField(max_length=500)
     autor=models.CharField(max_length=20)
-    fecha=models.DateField()
-    imagen=models.ImageField(upload_to="media", null=True)
+    fecha=models.DateField(auto_now_add=True)
+
+class AutoImagen(models.Model):
+    auto=models.OneToOneField(Auto, on_delete=models.CASCADE)
+    imagen=models.ImageField(upload_to="autos",null=True)
 
 class Moto(models.Model):
     titulo=models.CharField(max_length=30, unique=True)
     subtitulo=models.CharField(max_length=50)
     cuerpo=models.CharField(max_length=500)
     autor=models.CharField(max_length=20)
-    fecha=models.DateField()
-    imagen=models.ImageField(upload_to="media", null=True)
+    fecha=models.DateField(auto_now_add=True)
+
+class MotoImagen(models.Model):
+    moto=models.OneToOneField(Auto, on_delete=models.CASCADE)
+    imagen=models.ImageField(upload_to="motos",null=True)
 
 class Camioneta(models.Model):
     titulo=models.CharField(max_length=30, unique=True)
     subtitulo=models.CharField(max_length=50)
     cuerpo=models.CharField(max_length=500)
     autor=models.CharField(max_length=20)
-    fecha=models.DateField()
-    imagen=models.ImageField(upload_to="media", null=True)
+    fecha=models.DateField(auto_now_add=True)
+
+class CamionetaImagen(models.Model):
+    camioneta=models.OneToOneField(Camioneta, on_delete=models.CASCADE)
+    imagen=models.ImageField(upload_to="camionetas",null=True)

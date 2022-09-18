@@ -4,6 +4,7 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+<a class="navbar-brand" href="{% url 'agregarImagenAuto' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -12,16 +13,15 @@ Autos
 
 {% block contenido %}
     <h1>Agregar autos</h1>
-    <form action="" method="POST">
+    <form action="{% url 'auto' %}" method="POST">
         {% csrf_token %}
         <table>
             {{ form.as_table }}
         </table>
-        <input type="submit" value="Enviar">
+        <input type="submit", value="Enviar">
     </form>
     {% for auto in autos %}
-        {{ auto.titulo }} <br>
-        {{ auto.imagen }} <br>
-        
+        {{auto.titulo}}
+        <br>
     {% endfor %}
 {% endblock %}
