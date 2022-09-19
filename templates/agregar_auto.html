@@ -14,7 +14,7 @@ Autos
 
 {% block contenido %}
     <h1>Agregar auto</h1>
-    <form action="{% url 'agregarAuto' %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         <table>
             {{ form.as_table }}

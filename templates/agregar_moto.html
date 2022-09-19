@@ -14,7 +14,7 @@ Motos
 
 {% block contenido %}
 <h1>Agregar moto</h1>
-    <form action="{% url 'agregarMoto' %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         <table>
             {{ form.as_table }}

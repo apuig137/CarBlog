@@ -14,9 +14,22 @@ Motos
 {% endblock %}
 
 {% block contenido %}
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
     <h1>Motos cargadas</h1>
     {% for moto in motos %}
         {{moto.titulo}}
-        <br>
+            <button>
+                <a href="{% url 'eliminarMoto' moto.titulo %}">X</a>
+                
+            </button>
+            <button>
+                <a href="{% url 'editarMoto' moto.titulo %}">Editar</a>
+            </button>
+            <br>
     {% endfor %}
+
 {% endblock %}

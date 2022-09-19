@@ -14,9 +14,21 @@ Camionetas
 {% endblock %}
 
 {% block contenido %}
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
     <h1>Camionetas cargadas</h1>
     {% for camioneta in camionetas %}
         {{camioneta.titulo}}
+        <button>
+            <a href="{% url 'eliminarCamioneta' camioneta.titulo %}">X</a>
+        </button>
+        <button>
+            <a href="{% url 'editarCamioneta' camioneta.titulo %}">Editar</a>
+        </button>
         <br>
     {% endfor %}
+
 {% endblock %}
