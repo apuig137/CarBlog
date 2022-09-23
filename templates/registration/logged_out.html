@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block titulo %}
+Cerraste sesion
+{% endblock %}
+
+{% block contenido %}
+<p>Gracias por habernos visitado!</p>
+
+<button>
+    <a href="{% url 'login'%}">Iniciar sesion nuevamente</a>
+</button>
+
+{% endblock %}

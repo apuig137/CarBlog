@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
 <a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
 <a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 <a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
@@ -22,6 +21,6 @@ Motos
         {{ moto.cuerpo }}<br>
         {{ moto.autor }}<br>
         {{ moto.fecha }}<br>
-        <div class="divider"></div>
+        <hr class="my-4" />
     {% endfor %}
 {% endblock %}

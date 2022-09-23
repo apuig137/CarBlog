@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
 <a class="navbar-brand" href="{% url 'camioneta' %}">Camionetas</a>
 <a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
 <a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
@@ -22,6 +21,6 @@ Camionetas
         {{ camioneta.cuerpo }}<br>
         {{ camioneta.autor }}<br>
         {{ camioneta.fecha }}<br>
-        <div class="divider"></div>
+        <hr class="my-4" />
     {% endfor %}
 {% endblock %}

@@ -18,6 +18,7 @@ from django.urls import path, include
 from AppBlog.views import inicio, about
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -25,7 +26,8 @@ urlpatterns = [
     path("AppBlog/",include("AppBlog.urls")),
     path("AppUsuario/",include("AppUsuario.urls")),
     path("",inicio,name="inicio"),
-    path("about/",about,name="about")
+    path("about/",about,name="about"),
+    path("accounts/",include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:

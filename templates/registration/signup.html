@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block titulo %}
+Registrate en la pagina!
+{% endblock %}
+
+{% block contenido %}
+<form action="" method="POST">
+  {% csrf_token %}
+  
+    {{ form.as_p }}
+  
+    <input type="submit", value="Registrarse">
+</form>
+
+{% for message in messages %}
+  <p>{{ message }}</p>
+{% endfor %}
+
+{% endblock %}

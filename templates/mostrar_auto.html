@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
 <a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
 <a class="navbar-brand" href="{% url 'autoBusqueda' %}">Buscar Autos</a>
 <a class="navbar-brand" href="{% url 'agregarAuto' %}">Agregar Autos</a>
@@ -22,7 +21,7 @@ Autos
         {{ auto.cuerpo }}<br>
         {{ auto.autor }}<br>
         {{ auto.fecha }}<br>
-        <div class="divider"></div>
+        <hr class="my-4" />
     {% endfor %}
 {% endblock %}
     

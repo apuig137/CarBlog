@@ -3,24 +3,30 @@ from django.http import HttpResponse
 from AppBlog.models import *
 from AppBlog.forms import *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 def inicio(request):
     return render(request,"index.html")
 
+
 def about(request):
     return render(request,"portafolio.html")
 
+@login_required
 def auto(request):
     autos=Auto.objects.all()
     contexto={"autos":autos}
     return render(request,"auto.html",contexto)
 
+@login_required
 def eliminar_auto(request, titulo):
     auto_eliminar=Auto.objects.get(titulo=titulo)
     auto_eliminar.delete()
     messages.info(request,f"Articulo de {auto_eliminar} eliminado")
     return redirect("auto")
 
+@login_required
 def editar_auto(request, titulo):
     auto_editar=Auto.objects.get(titulo=titulo)
 
@@ -47,6 +53,7 @@ def editar_auto(request, titulo):
     }
     return render(request,"agregar_auto.html",contexto)
 
+@login_required
 def agregar_auto(request):
     if request.method == "POST":
         mi_formulario = AutoFormulario(request.POST)
@@ -66,20 +73,23 @@ def agregar_auto(request):
     }
     return render(request,"agregar_auto.html",contexto)
 
+@login_required
 def auto_busqueda(request):
     contexto={
         "form":VehiculoBusqueda(),
     }
     return render(request,"auto_busqueda.html",contexto)
-      
+
+@login_required
 def mostrar_auto(request):
     titulo=request.GET.get('titulo')
     autos=Auto.objects.filter(titulo__icontains=titulo)
     contexto={
-        "autos":autos
+        "autos":autos,
     }
     return render(request,"mostrar_auto.html",contexto)
 
+@login_required
 def agregar_imagen_auto(request):
     if request.method=="POST":
         mi_formulario=AutoImagenFormulario(request.POST,request.FILES)
@@ -99,17 +109,20 @@ def agregar_imagen_auto(request):
     }
     return render(request,"agregar_imagen_auto.html",contexto)
 
+@login_required
 def moto(request):
     motos=Moto.objects.all()
     contexto={"motos":motos}
     return render(request,"moto.html",contexto)
 
+@login_required
 def eliminar_moto(request, titulo):
     moto_eliminar=Moto.objects.get(titulo=titulo)
     moto_eliminar.delete()
     messages.info(request,f"Articulo de {moto_eliminar} eliminado")
     return redirect("moto")
 
+@login_required
 def editar_moto(request, titulo):
     moto_editar=Moto.objects.get(titulo=titulo)
 
@@ -136,6 +149,7 @@ def editar_moto(request, titulo):
     }
     return render(request,"agregar_moto.html",contexto)
 
+@login_required
 def agregar_moto(request):
     if request.method == "POST":
         mi_formulario = MotoFormulario(request.POST)
@@ -155,12 +169,14 @@ def agregar_moto(request):
     }
     return render(request,"agregar_moto.html",contexto)
 
+@login_required
 def moto_busqueda(request):
     contexto={
         "form":VehiculoBusqueda(),
     }
     return render(request,"moto_busqueda.html",contexto)
-      
+
+@login_required  
 def mostrar_moto(request):
     titulo=request.GET.get('titulo')
     motos=Moto.objects.filter(titulo__icontains=titulo)
@@ -169,6 +185,7 @@ def mostrar_moto(request):
     }
     return render(request,"mostrar_moto.html",contexto)
 
+@login_required
 def agregar_imagen_moto(request):
     if request.method=="POST":
         mi_formulario=MotoImagenFormulario(request.POST,request.FILES)
@@ -188,17 +205,20 @@ def agregar_imagen_moto(request):
     }
     return render(request,"agregar_imagen_moto.html",contexto)
 
+@login_required
 def camioneta(request):
     camionetas=Camioneta.objects.all()
     contexto={"camionetas":camionetas}
     return render(request,"camioneta.html",contexto)
 
+@login_required
 def eliminar_camioneta(request, titulo):
     camioneta_eliminar=Camioneta.objects.get(titulo=titulo)
     camioneta_eliminar.delete()
     messages.info(request,f"Articulo de {camioneta_eliminar} eliminado")
     return redirect("camioneta")
 
+@login_required
 def editar_camioneta(request, titulo):
     camioneta_editar=Camioneta.objects.get(titulo=titulo)
 
@@ -225,6 +245,7 @@ def editar_camioneta(request, titulo):
     }
     return render(request,"agregar_camioneta.html",contexto)
 
+@login_required
 def agregar_camioneta(request):
     if request.method == "POST":
         mi_formulario = CamionetaFormulario(request.POST)
@@ -244,12 +265,14 @@ def agregar_camioneta(request):
     }
     return render(request,"agregar_camioneta.html",contexto)
 
+@login_required
 def camioneta_busqueda(request):
     contexto={
         "form":VehiculoBusqueda(),
     }
     return render(request,"camioneta_busqueda.html",contexto)
       
+@login_required
 def mostrar_camioneta(request):
     titulo=request.GET.get('titulo')
     camionetas=Camioneta.objects.filter(titulo__icontains=titulo)
@@ -258,6 +281,7 @@ def mostrar_camioneta(request):
     }
     return render(request,"mostrar_camioneta.html",contexto)
 
+@login_required
 def camioneta_filtrado(request):
     titulo = request.GET.get("titulo")
     camionetas = Camioneta.objects.filter(titulo__icontains=titulo)
@@ -266,6 +290,7 @@ def camioneta_filtrado(request):
     }
     return render(request,"camioneta_filtrado.html",contexto)
 
+@login_required
 def agregar_imagen_camioneta(request):
     if request.method=="POST":
         mi_formulario=CamionetaImagenFormulario(request.POST,request.FILES)
