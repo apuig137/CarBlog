@@ -17,10 +17,10 @@
           <h2>A<span>P</span></h2>
         </div>
         <ul class="menu">
-          <li><a href="#"  class="activo">Inicio</a></li>
-          <li><a href="#">Quien Soy</a></li>
-          <li><a href="#">Portafolio</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="{% url 'inicio' %}"  class="activo">Inicio</a></li>
+          <li><a href="#acerca">Quien Soy</a></li>
+          <li><a href="#portafolio">Portafolio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </header>
@@ -35,7 +35,7 @@
     </main>
   </div>
 
-  <div class="acerca">
+  <div class="acerca" id="acerca">
     <img src='{% static "AppBlog/img/HD-wallpaper-code-codes-data-click-programming-text.jpg" %}' alt="">
     <div class="acerca-info">
       <h2>Acerca de mi</h2>
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="portafolio">
+  <div class="portafolio" id="portafolio">
     <div class="portafolio-headings">
       <h2>Mi Portafolio</h2>
       <div class="divider"></div>
@@ -108,7 +108,7 @@
     </div>
   </div>
 
-  <div class="contact-section">
+  <div class="contact-section" id="contacto">
     <div class="contact-headings">
       <h2>Contactar</h2>
       <div class="divider"></div>

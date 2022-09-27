@@ -6,7 +6,6 @@
 <a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
 <a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 <a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
-<a class="navbar-brand" href="{% url 'agregarImagenMoto' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -21,6 +20,7 @@ Motos
         {{ moto.cuerpo }}<br>
         {{ moto.autor }}<br>
         {{ moto.fecha }}<br>
-        <hr class="my-4" />
+        {{ moto.imagen }}<br>
     {% endfor %}
+    <hr class="my-4" />
 {% endblock %}

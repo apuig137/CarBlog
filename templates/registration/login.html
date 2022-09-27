@@ -1,5 +1,13 @@
 {% extends "index.html" %}
 
+{% block register %}
+  {% if user.is_authenticated %}
+    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout'%}?next={{request.path}}">Cerrar Sesion</a></li>
+  {% else %}
+    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'signup'%}?next={{request.path}}">Registrarse</a></li>
+  {% endif %}
+{% endblock %}
+
 {% block titulo %}
 Iniciar Sesion
 {% endblock %}

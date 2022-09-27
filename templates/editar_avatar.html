@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block titulo %}
+Editar Avatar
+{% endblock %}
+
+{% block contenido %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit", value="Guardar">
+    </form>
+{% endblock %}

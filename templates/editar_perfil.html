@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block titulo %}
+Editar Perfil
+{% endblock %}
+
+{% block contenido %}
+    <h3>Para confirmar sus datos coloque su contraseña.</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit", value="Guardar">
+    </form>
+{% endblock %}

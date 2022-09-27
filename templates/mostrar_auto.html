@@ -6,7 +6,6 @@
 <a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
 <a class="navbar-brand" href="{% url 'autoBusqueda' %}">Buscar Autos</a>
 <a class="navbar-brand" href="{% url 'agregarAuto' %}">Agregar Autos</a>
-<a class="navbar-brand" href="{% url 'agregarImagenAuto' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -21,7 +20,8 @@ Autos
         {{ auto.cuerpo }}<br>
         {{ auto.autor }}<br>
         {{ auto.fecha }}<br>
-        <hr class="my-4" />
+        <img src="{{ auto.imagen.url }}" alt=""><br>
+    <hr class="my-4" />
     {% endfor %}
 {% endblock %}
     

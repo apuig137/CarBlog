@@ -1,68 +1,9 @@
-from email import message_from_binary_file
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from AppUsuario.forms import SignUpForm
-
-
-"""
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
-"""
-
-"""
-def signup(request):
-    dicctionary = {}
-   # dicctionary.update(login2(request))
-    print(dicctionary)
-    if request.method == 'POST': 
-            username = request.POST.get('username', False)
-            if User.objects.filter(username=username).exists():
-                respuesta = {"mensaje" : "Ya existe usuario."}
-                return render(request,'registration/signup.html',respuesta)
-
-            password = request.POST.get('password', False)
-            mail = request.POST.get('mail', False)
-            if User.objects.filter(email=mail).exists():
-                respuesta = {"mensaje" : "Ya existe correo."}
-                return render(request,'registration/signup.html',respuesta)
-            createacc =    User.objects.create_user(username, mail, password)
-            createacc.save()
-            respuesta = {"mensaje" : "Cuenta creada correctamente."}
-            return render(request,'registration/signup.html',respuesta)
-    return render(request,'registration/signup.html', dicctionary)
-"""
-
-"""
-def signup(request):
-    if request.method == "POST":
-        mi_formulario = UserCreationForm(request.POST)
-        print(mi_formulario)
-        if mi_formulario.is_valid():
-            username = mi_formulario.cleaned_data.get("username")
-            password = mi_formulario.cleaned_data.get("password")
-            user = User.objects.create(username,password)
-            user.save()
-            return redirect("inicio")
-    users=User.objects.all()
-    contexto = {
-        "form" : UserCreationForm(),
-        "users" : users,
-    }
-    return render(request,"registration/signup.html",contexto)
-    """
+from AppUsuario.forms import SignUpForm, AvatarForm
+from AppUsuario.models import Avatar
+from django.contrib.auth.decorators import login_required
+import os
 
 def signup(request):
     if request.method == "POST":
@@ -72,8 +13,57 @@ def signup(request):
             messages.info(request,"Usuario registrado correctamente, inicie sesion para disfrutar de nuestra pagina!")
         else:
             messages.info(request,"Contraseña o usuario incorrecto")
-        return redirect("signup")
+        return redirect("inicio")
     contexto = {
         "form" : SignUpForm(),
     }
     return render(request,"registration/signup.html",contexto)
+
+@login_required
+def editar_perfil(request):
+    usuario=request.user
+    if request.method == "POST":
+        mi_formulario = SignUpForm(request.POST)
+        if mi_formulario.is_valid():
+            data=mi_formulario.cleaned_data
+            usuario.username=data.get("username")
+            usuario.email=data.get("email")
+            usuario.save()
+            messages.info(request,"Usuario editado correctamente")
+        else:
+            messages.info(request,"No se pudo editar el usuario")
+        return redirect("inicio")
+    contexto = {
+        "form" : SignUpForm(
+            initial={
+                "username":usuario.username,
+                "email":usuario.email,
+            }
+        ),
+    }
+    return render(request,"editar_perfil.html",contexto)
+
+@login_required
+def editar_avatar(request):
+    if request.method == "POST":
+        formulario = AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            try:
+                post = Avatar.objects.get(user=request.user)
+                try:
+                    os.remove(post.imagen.path)
+                    print('Old post image deleted...! path = '+str(post.imagen.path))
+                except Exception as e:
+                    print('No image for delete '+str(e))
+                post.imagen = request.FILES['imagen']
+                post.save()
+            except Exception as e:
+                    print(e) 
+        else:
+            print("no valido")   
+        messages.info(request,"Usuario editado correctamente")
+        return redirect("inicio")
+    contexto = {
+        "form": AvatarForm(),
+    }
+    return render(request, "editar_avatar.html", contexto)

@@ -6,7 +6,6 @@
 <a class="navbar-brand" href="{% url 'camioneta' %}">Camionetas</a>
 <a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
 <a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
-<a class="navbar-brand" href="{% url 'agregarImagenCamioneta' %}">Agregar Imagenes</a>
 {% endblock %}
 
 {% block titulo %}
@@ -21,6 +20,7 @@ Camionetas
         {{ camioneta.cuerpo }}<br>
         {{ camioneta.autor }}<br>
         {{ camioneta.fecha }}<br>
-        <hr class="my-4" />
+        {{ camioneta.imagen }}<br>
     {% endfor %}
+    <hr class="my-4" />
 {% endblock %}

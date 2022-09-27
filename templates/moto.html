@@ -4,7 +4,6 @@
 
 {% block barraDeNavegacion %}
 <a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
-<a class="navbar-brand" href="{% url 'agregarImagenMoto' %}">Agregar Imagenes</a>
 <a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
 {% endblock %}
 
@@ -23,7 +22,6 @@ Motos
         {{moto.titulo}}
             <button>
                 <a href="{% url 'eliminarMoto' moto.titulo %}">X</a>
-                
             </button>
             <button>
                 <a href="{% url 'editarMoto' moto.titulo %}">Editar</a>
