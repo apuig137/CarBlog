@@ -20,7 +20,11 @@ Motos
         {{ moto.cuerpo }}<br>
         {{ moto.autor }}<br>
         {{ moto.fecha }}<br>
-        {{ moto.imagen }}<br>
+        {% if moto.imagen %}
+            <img src="{{ moto.imagen.url }}" width="50%" weigth="50%"><br>
+        {% else %}
+            <p>No hay imagen.</p>
+        {% endif %}
     {% endfor %}
     <hr class="my-4" />
 {% endblock %}

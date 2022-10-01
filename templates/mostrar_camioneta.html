@@ -20,7 +20,11 @@ Camionetas
         {{ camioneta.cuerpo }}<br>
         {{ camioneta.autor }}<br>
         {{ camioneta.fecha }}<br>
-        {{ camioneta.imagen }}<br>
+        {% if camioneta.imagen %}
+            <img src="{{ camioneta.imagen.url }}" width="50%" weigth="50%"><br>
+        {% else %}
+            <p>No hay imagen.</p>
+        {% endif %}
     {% endfor %}
     <hr class="my-4" />
 {% endblock %}

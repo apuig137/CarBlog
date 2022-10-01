@@ -2,17 +2,15 @@
 
 {% load static %}
 
-{% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'moto' %}">motos</a>
-<a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
-{% endblock %}
-
 {% block titulo %}
-Motos
+Motos <br>
+<a href="{% url 'moto' %}"><button type="button" class="btn btn-success">Motos</button></a>
+<a href="{% url 'agregarMoto' %}"><button type="button" class="btn btn-success">Agregar Motos</button></a>
 {% endblock %}
 
 {% block contenido %}
-    <h3>Ingrese el auto que mas le guste:</h3>
+
+    <h3>Ingrese la moto que mas le guste:</h3>
     <form action="{% url 'mostrarMoto' %}" method="GET">
         {% csrf_token %}
             {{ form.as_p }}

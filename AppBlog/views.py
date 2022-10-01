@@ -4,7 +4,7 @@ from AppBlog.models import *
 from AppUsuario.models import *
 from AppBlog.forms import *
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 def inicio(request):
     return render(request,"index.html")
@@ -18,14 +18,14 @@ def auto(request):
     contexto={"autos":autos}
     return render(request,"auto.html",contexto)
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def eliminar_auto(request, titulo):
     auto_eliminar=Auto.objects.get(titulo=titulo)
     auto_eliminar.delete()
     messages.info(request,f"Articulo de {auto_eliminar} eliminado")
     return redirect("auto")
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def editar_auto(request, titulo):
     auto_editar=Auto.objects.get(titulo=titulo)
 
@@ -92,19 +92,27 @@ def mostrar_auto(request):
     return render(request,"mostrar_auto.html",contexto)
 
 @login_required
+def ver_auto(request,titulo):
+    autos=Auto.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "autos":autos,
+    }
+    return render(request,"ver_auto.html",contexto)
+
+@login_required
 def moto(request):
     motos=Moto.objects.all()
     contexto={"motos":motos}
     return render(request,"moto.html",contexto)
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def eliminar_moto(request, titulo):
     moto_eliminar=Moto.objects.get(titulo=titulo)
     moto_eliminar.delete()
     messages.info(request,f"Articulo de {moto_eliminar} eliminado")
     return redirect("moto")
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def editar_moto(request, titulo):
     moto_editar=Moto.objects.get(titulo=titulo)
 
@@ -171,19 +179,27 @@ def mostrar_moto(request):
     return render(request,"mostrar_moto.html",contexto)
 
 @login_required
+def ver_moto(request,titulo):
+    motos=Moto.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "motos":motos,
+    }
+    return render(request,"ver_moto.html",contexto)
+
+@login_required
 def camioneta(request):
     camionetas=Camioneta.objects.all()
     contexto={"camionetas":camionetas}
     return render(request,"camioneta.html",contexto)
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def eliminar_camioneta(request, titulo):
     camioneta_eliminar=Camioneta.objects.get(titulo=titulo)
     camioneta_eliminar.delete()
     messages.info(request,f"Articulo de {camioneta_eliminar} eliminado")
     return redirect("camioneta")
 
-@login_required
+@permission_required('AppBlog.eliminar_auto/<str:titulo>', login_url='/accounts/login/')
 def editar_camioneta(request, titulo):
     camioneta_editar=Camioneta.objects.get(titulo=titulo)
 
@@ -239,7 +255,7 @@ def camioneta_busqueda(request):
         "form":VehiculoBusqueda(),
     }
     return render(request,"camioneta_busqueda.html",contexto)
-      
+
 @login_required
 def mostrar_camioneta(request):
     titulo=request.GET.get('titulo')
@@ -250,10 +266,9 @@ def mostrar_camioneta(request):
     return render(request,"mostrar_camioneta.html",contexto)
 
 @login_required
-def camioneta_filtrado(request):
-    titulo = request.GET.get("titulo")
-    camionetas = Camioneta.objects.filter(titulo__icontains=titulo)
-    contexto = {
-        "camionetas" : camionetas,
+def ver_camioneta(request,titulo):
+    camionetas=Camioneta.objects.filter(titulo__icontains=titulo)
+    contexto={
+        "camionetas":camionetas,
     }
-    return render(request,"camioneta_filtrado.html",contexto)
+    return render(request,"ver_camioneta.html",contexto)

@@ -15,16 +15,15 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href='{% static "AppBlog/css/styles.css" %}' rel="stylesheet" />
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                {% block barraDeNavegacion %}
-                <a class="navbar-brand" href="{% url 'auto' %}">Autos</a>
-                <a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
-                <a class="navbar-brand" href="{% url 'camioneta' %}">Camionetas</a>
-                {% endblock %}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -32,15 +31,18 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Acerca de mi</a></li>
+                        <li class="nav-item"><a target="_blank" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Acerca de mi</a></li>
                         {% block register %}
                             {% if user.is_authenticated %}
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editarPerfil'%}?next={{request.path}}">Editar Perfil</a></li>
-                                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editarAvatar'%}?next={{request.path}}">Cambiar Avatar</a></li>
+                                {% if user.avatar %}
+                                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editarAvatar'%}?next={{request.path}}">Cambiar Avatar</a></li>
+                                {% else %}
+                                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'agregarAvatar'%}?next={{request.path}}">Agregar Avatar</a></li>
+                                {% endif %}
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout'%}?next={{request.path}}">Cerrar Sesion</a></li>
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4">{{ user.username }}</a></li>
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"> <img width=50px height=50px border-radius=100% class="cuadrado" src="{{ user.avatar.imagen.url }}" alt=""> </a></li>
-                                
                             {% else %}
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login'%}?next={{request.path}}">Iniciar Sesion</a></li>
                                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'signup'%}?next={{request.path}}">Registrarse</a></li>
@@ -51,7 +53,7 @@
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+        <header class="masthead">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -73,64 +75,47 @@
         </header>
         <!-- Main Content-->
         {% block contenido %}
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2022
-                        </p>
+        <div class="card">
+            <div class="card text-center">
+                <h4>Bienvenido a nuestro blog, aqui encontraras la mejor informacion de los vehiculos que quieras y podras compartir tu experiencia con otros usuario!</h4>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/static/AppBlog/assets/img/yamaha-yzf-r3.jpg" height="100%" width="100%" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Motos</h5>
+                        <p class="card-text">Articulos de motocicletas con toda la informacion de cada modelo brindada por los usuarios.</p>
+                        <div class="text-center" >
+                            <a href="{% url 'moto' %}"><button type="button" href="#" class="btn btn-primary">Ver mas</button></a>
+                        </div>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 18, 2022
-                        </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/static/AppBlog/assets/img/autocard.jfif" height="100%" width="100%" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Autos</h5>
+                        <p class="card-text">Articulos de automoviles con toda la informacion de cada modelo brindada por los usuarios.</p>
+                        <div class="text-center" >
+                            <a href="{% url 'auto' %}"><button type="button" href="#" class="btn btn-primary">Ver mas</button></a>
+                        </div>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on August 24, 2022
-                        </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/static/AppBlog/assets/img/camionetacard.jpg" height="100%" width="100%" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Camionetas</h5>
+                        <p class="card-text">Articulos de camionetas con toda la informacion de cada modelo brindada por los usuarios.</p>
+                        <div class="text-center" >
+                            <a href="{% url 'camioneta' %}"><button type="button" href="#" class="btn btn-primary">Ver mas</button></a>
+                        </div>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            <h2 class="post-title">Failure is not an option</h2>
-                            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on July 8, 2022
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
                 </div>
             </div>
         </div>

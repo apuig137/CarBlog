@@ -2,31 +2,25 @@
 
 {% load static %}
 
-{% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
-<a class="navbar-brand" href="{% url 'camionetaBusqueda' %}">Buscar Camionetas</a>
-{% endblock %}
-
 {% block titulo %}
-Camionetas
+Camionetas <br>
+<a href="{% url 'agregarCamioneta' %}"><button type="button" class="btn btn-success">Agregar Camionetas</button></a>
+<a href="{% url 'camionetaBusqueda' %}"><button type="button" class="btn btn-success">Buscar Camionetas</button></a>
 {% endblock %}
 
 {% block contenido %}
-
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
 
     <h1>Camionetas cargadas</h1>
     {% for camioneta in camionetas %}
-        {{camioneta.titulo}}
-        <button>
-            <a href="{% url 'eliminarCamioneta' camioneta.titulo %}">X</a>
-        </button>
-        <button>
-            <a href="{% url 'editarCamioneta' camioneta.titulo %}">Editar</a>
-        </button>
-        <br>
+    <ul class="list-group">
+        <li class="list-group-item"><h4>{{camioneta.titulo}}</h4>
+            <a href="{% url 'eliminarCamioneta' camioneta.titulo %}"><button type="button" href="#" class="btn btn-primary">X</button></a>
+            <a href="{% url 'editarCamioneta' camioneta.titulo %}"><button type="button" href="#" class="btn btn-primary">Editar</button></a>
+            <a href="{% url 'verCamioneta' camioneta.titulo %}"><button type="button" href="#" class="btn btn-primary">Ver mas</button></a>
+        </li>
+    </ul>
     {% endfor %}
-
 {% endblock %}

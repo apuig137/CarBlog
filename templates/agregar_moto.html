@@ -2,15 +2,13 @@
 
 {% load static %}
 
-{% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'moto' %}">Motos</a>
-{% endblock %}
-
 {% block titulo %}
-Motos
+Motos <br>
+<a href="{% url 'moto' %}"><button type="button" class="btn btn-success">Motos</button></a>
 {% endblock %}
 
 {% block contenido %}
+
 <h1>Agregar moto</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}

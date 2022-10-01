@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block titulo %}
+Camionetas <br>
+<a href="{% url 'camioneta' %}"><button type="button" class="btn btn-success">Camionetas</button></a>
+<a href="{% url 'camionetaBusqueda' %}"><button type="button" class="btn btn-success">Buscar Camionetas</button></a>
+<a href="{% url 'agregarCamioneta' %}"><button type="button" class="btn btn-success">Agregar Camionetas</button></a>
+{% endblock %}
+
+{% block contenido %}
+    {% for camioneta in camionetas %}
+        {{ camioneta.titulo }}<br>
+        {{ camioneta.subtitulo }}<br>
+        {{ camioneta.cuerpo }}<br>
+        {{ camioneta.autor }}<br>
+        {{ camioneta.fecha }}<br>
+        {% if camioneta.imagen %}
+            <img src="{{ camioneta.imagen.url }}" width="50%" weigth="50%"><br>
+        {% else %}
+            <p>No hay imagen.</p>
+        {% endif %}
+    <hr class="my-4" />
+    {% endfor %}
+{% endblock %}

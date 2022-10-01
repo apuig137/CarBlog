@@ -2,13 +2,10 @@
 
 {% load static %}
 
-{% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'agregarMoto' %}">Agregar Motos</a>
-<a class="navbar-brand" href="{% url 'motoBusqueda' %}">Buscar Motos</a>
-{% endblock %}
-
 {% block titulo %}
-Motos
+Motos <br> 
+<a href="{% url 'agregarMoto' %}"><button type="button" class="btn btn-success">Agregar Motos</button></a>
+<a href="{% url 'motoBusqueda' %}"><button type="button" class="btn btn-success">Buscar Motos</button></a>
 {% endblock %}
 
 {% block contenido %}
@@ -19,14 +16,13 @@ Motos
 
     <h1>Motos cargadas</h1>
     {% for moto in motos %}
-        {{moto.titulo}}
-            <button>
-                <a href="{% url 'eliminarMoto' moto.titulo %}">X</a>
-            </button>
-            <button>
-                <a href="{% url 'editarMoto' moto.titulo %}">Editar</a>
-            </button>
-            <br>
+    <ul class="list-group">
+        <li class="list-group-item"><h4>{{moto.titulo}}</h4>
+            <a href="{% url 'eliminarMoto' moto.titulo %}"><button type="button" href="#" class="btn btn-primary">X</button></a>
+            <a href="{% url 'editarMoto' moto.titulo %}"><button type="button" href="#" class="btn btn-primary">Editar</button></a>
+            <a href="{% url 'verMoto' moto.titulo %}"><button type="button" href="#" class="btn btn-primary">Ver mas</button></a>
+        </li>
+    </ul>
     {% endfor %}
 
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block titulo %}
+Autos <br>
+<a href="{% url 'auto' %}"><button type="button" class="btn btn-success">Autos</button></a>
+<a href="{% url 'autoBusqueda' %}"><button type="button" class="btn btn-success">Buscar Autos</button></a>
+<a href="{% url 'agregarAuto' %}"><button type="button" class="btn btn-success">Agregar Autos</button></a>
+{% endblock %}
+
+{% block contenido %}
+    {% for auto in autos %}
+        {{ auto.titulo }}<br>
+        {{ auto.subtitulo }}<br>
+        {{ auto.cuerpo }}<br>
+        {{ auto.autor }}<br>
+        {{ auto.fecha }}<br>
+        {% if auto.imagen %}
+            <img src="{{ auto.imagen.url }}" width="50%" weigth="50%"><br>
+        {% else %}
+            <p>No hay imagen.</p>
+        {% endif %}
+    <hr class="my-4" />
+    {% endfor %}
+{% endblock %}

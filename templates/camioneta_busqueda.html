@@ -2,17 +2,15 @@
 
 {% load static %}
 
-{% block barraDeNavegacion %}
-<a class="navbar-brand" href="{% url 'camioneta' %}">Camionetas</a>
-<a class="navbar-brand" href="{% url 'agregarCamioneta' %}">Agregar Camionetas</a>
-{% endblock %}
-
 {% block titulo %}
-Camionetas
+Camionetas <br>
+<a href="{% url 'camioneta' %}"><button type="button" class="btn btn-success">Camionetas</button></a>
+<a href="{% url 'agregarCamioneta' %}"><button type="button" class="btn btn-success">Agregar Camionetas</button></a>
 {% endblock %}
 
 {% block contenido %}
-    <h3>Ingrese el auto que mas le guste:</h3>
+
+    <h3>Ingrese la camioneta que mas le guste:</h3>
     <form action="{% url 'mostrarCamioneta' %}" method="GET">
         {% csrf_token %}
             {{ form.as_p }}

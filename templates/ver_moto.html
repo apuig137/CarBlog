@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block titulo %}
+Motos <br>
+<a href="{% url 'moto' %}"><button type="button" class="btn btn-success">Motos</button></a>
+<a href="{% url 'motoBusqueda' %}"><button type="button" class="btn btn-success">Buscar Motos</button></a>
+<a href="{% url 'agregarMoto' %}"><button type="button" class="btn btn-success">Agregar Motos</button></a>
+{% endblock %}
+
+{% block contenido %}
+
+    {% for moto in motos %}
+        {{ moto.titulo }}<br>
+        {{ moto.subtitulo }}<br>
+        {{ moto.cuerpo }}<br>
+        {{ moto.autor }}<br>
+        {{ moto.fecha }}<br>
+        {% if moto.imagen %}
+            <img src="{{ moto.imagen.url }}" width="50%" weigth="50%"><br>
+        {% else %}
+            <p>No hay imagen.</p>
+        {% endif %}
+    <hr class="my-4" />
+    {% endfor %}
+{% endblock %}
