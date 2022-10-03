@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from AppBlog.views import inicio, about
+from AppBlog.views import inicio, about, no_disponible
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -26,6 +26,7 @@ urlpatterns = [
     path("",inicio,name="inicio"),
     path("about/",about,name="about"),
     path("accounts/",include("django.contrib.auth.urls")),
+    path("no_disponible/",no_disponible,name="noDisponible")
 ]
 
 if settings.DEBUG:

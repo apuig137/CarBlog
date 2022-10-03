@@ -1,0 +1,3 @@
+El proyecto fue completamente desarrollado por Roberto Agustin Puig.
+
+Desarrolle las aplicaciones con sus respectivas vistas, modelos, formularios, y templates para rendeitizar las vistas recientenmente mencionadas. Me encargue tambien de llevar a cabo la generacion de un portafolio con su css y su template. Utilice bootstrap para decorar los templates estaticos los cuales heredan de index.html. Tambien utilice @loginrequired para que los usuarios deban loguearse si desean seguir explorando la pagina y restringi los metodos para editar o eliminar un blog. El link al video donde se muestra el uso de la pagina esta en linkvideo.txt.

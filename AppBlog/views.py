@@ -12,6 +12,9 @@ def inicio(request):
 def about(request):
     return render(request,"portafolio.html")
 
+def no_disponible(request):
+    return render(request,"no_disponible.html")
+
 @login_required
 def auto(request):
     autos=Auto.objects.all()
