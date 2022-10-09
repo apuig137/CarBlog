@@ -12,8 +12,6 @@ Autos <br>
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
-    <a href="{% url 'agregarAuto' %}"><button type="button" class="btn btn-success">Agregar Autos</button></a>
-    <a href="{% url 'autoBusqueda' %}"><button type="button" class="btn btn-success">Buscar Autos</button></a>
     <h1>Autos cargados</h1>
     {% for auto in autos %}
     <ul class="list-group">
